@@ -1,8 +1,8 @@
 #!groovy
 
-if (env.BRANCH_NAME == "master") {
+if (env.BRANCH_NAME == "prod") {
     buildEnv = "production"
-    executorEnv = "prd"
+    executorEnv = "prod"
 } else {
     buildEnv = "dev"
     executorEnv = "dev"
@@ -20,7 +20,7 @@ node('executor') {
                     yarn run clean
                     yarn
                     yarn run build-${buildEnv}"""
-            
+
                 stash includes: "dist/**", name: 'dist'
             }
 
@@ -29,7 +29,7 @@ node('executor') {
                     xvfb-run --auto-servernum --server-args='-screen 0, 1024x768x16' yarn run test"""
             }
 
-            if (["DEVELOPMENT", "master"].contains(env.BRANCH_NAME)) {
+            if (["main", "prod"].contains(env.BRANCH_NAME)) {
                 stage('Deploy') {
                     node("${executorEnv}-executor") {
                         def bucketName = "pennsieve-${executorEnv}-admin-use1"
@@ -38,7 +38,7 @@ node('executor') {
 
                         sh "aws s3 --region us-east-1 rm --recursive s3://$bucketName"
                         sh "aws s3 --region us-east-1 cp --recursive dist s3://$bucketName"
-                        
+
                         def distributionId = sh(
                             script: "aws cloudfront list-distributions --query \"DistributionList.Items[?contains(Origins.Items[0].DomainName, '${bucketName}.s3.amazonaws.com')].Id\" --output text",
                             returnStdout: true
