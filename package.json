@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "yarn run dev",
+    "start": "yarn site-config-dev && yarn run dev",
     "site-config-dev": "cp ./src/site-config/dev.json ./src/site-config/site.json",
     "site-config-prod": "cp ./src/site-config/prod.json ./src/site-config/site.json",
     "build-dev": "yarn site-config-dev && node build/build.js",
@@ -15,6 +15,7 @@
     "test": "echo \"Please write some tests :)\""
   },
   "dependencies": {
+    "aws-amplify": "^3.3.26",
     "axios": "^0.17.1",
     "ramda": "^0.25.0",
     "sweetalert": "^2.1.0",

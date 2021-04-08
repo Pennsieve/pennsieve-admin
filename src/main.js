@@ -10,6 +10,10 @@ import Autocomplete from 'v-autocomplete'
 
 import * as site from '@/site-config/site.json';
 
+import Amplify from '@aws-amplify/core'
+import AWSConfig from '@/utils/aws-exports.js'
+Amplify.configure(AWSConfig)
+
 Vue.use(VueAxios, axios);
 Vue.use(VModal);
 Vue.use(require("vue-moment"));
