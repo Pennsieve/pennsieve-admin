@@ -27,6 +27,9 @@
 </template>
 
 <script>
+import { pathOr } from 'ramda'
+import Auth from '@aws-amplify/auth'
+
 export default {
   name: 'Login',
   data: function () {
@@ -37,28 +40,26 @@ export default {
     }
   },
   methods: {
-    login: function (e) {
-      e.preventDefault();
+    /**
+     * Makes XHR call to login
+     */
+    async login() {
       this.loading = true;
-
-      this.$http.post('account/login', {
-        email: this.email,
-        password: this.password
-      })
-      .then(response => {
+       try {
+        const user = await Auth.signIn(this.email, this.password);
         this.loading = false;
 
-        const token = "bearer " + response.data.sessionToken;
+        const jwtToken = pathOr('', ['signInUserSession', 'accessToken', 'jwtToken'], user)
+        const token = `bearer ${jwtToken}`;
         this.axios.defaults.headers.common['Authorization'] = token;
         sessionStorage.setItem('pennsieve-admin-token', token);
 
         this.$store.dispatch('loginUser');
         this.$router.push('/');
-      })
-      .catch(error => {
-        this.loading = false;
-      });
-    },
+        } catch (error) {
+          this.loading = false;
+        }
+    }
   }
 }
 
