@@ -51,7 +51,11 @@ export default {
 
         const jwtToken = pathOr('', ['signInUserSession', 'accessToken', 'jwtToken'], user)
         const token = `bearer ${jwtToken}`;
-        this.axios.defaults.headers.common['Authorization'] = token;
+
+        this.axios.defaults.params = {};
+        this.axios.defaults.params['api_key'] = jwtToken
+
+        // this.axios.defaults.headers.common['Authorization'] = token;
         sessionStorage.setItem('pennsieve-admin-token', token);
 
         this.$store.dispatch('loginUser');

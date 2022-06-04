@@ -2,7 +2,7 @@
   "API_URL": "https://api.pennsieve.io/",
   "awsConfig": {
     "region": "us-east-1",
-    "userPoolId": "us-east-1_Dzx1zcVSn",
-    "userPoolWebClientId": "6ef05ls57egbottu17s8ul804"
+    "userPoolId": "us-east-1_b1NyxYcr0",
+    "userPoolWebClientId": "670mo7si81pcc3sfub7o1914d8"
   }
 }
