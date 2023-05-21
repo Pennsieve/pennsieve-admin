@@ -1,6 +1,7 @@
 {
   "API_URL": "https://api.pennsieve.net/",
   "awsConfig": {
+    "authenticationFlowType": "USER_PASSWORD_AUTH",
     "region": "us-east-1",
     "userPoolId": "us-east-1_FVLhJ7CQA",
     "userPoolWebClientId": "703lm5d8odccu21pagcfjkeaea"
