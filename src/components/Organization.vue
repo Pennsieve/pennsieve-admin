@@ -182,7 +182,7 @@ export default {
      * @returns {String}
      */
     termsOfServiceUrl: function() {
-      return `organizations/${this.id}/custom-terms-of-service`
+      return `admin/organizations/${this.id}/custom-terms-of-service`
     },
 
     /**
