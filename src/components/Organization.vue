@@ -388,7 +388,7 @@ export default {
      * Submit terms of service xhr
      */
     submitTermsOfService: function() {
-      const url = `admin/${this.termsOfServiceUrl}?isNewVersion=${this.isNewVersion}`
+      const url = `${this.termsOfServiceUrl}?isNewVersion=${this.isNewVersion}`
 
       this.$http.put(url, this.termsOfServiceFile, {
         headers: {
