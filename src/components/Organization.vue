@@ -182,7 +182,7 @@ export default {
      * @returns {String}
      */
     termsOfServiceUrl: function() {
-      return `admin/organizations/${this.id}/custom-terms-of-service`
+      return `organizations/${this.id}/custom-terms-of-service`
     },
 
     /**
@@ -388,7 +388,7 @@ export default {
      * Submit terms of service xhr
      */
     submitTermsOfService: function() {
-      const url = `admin/${this.termsOfServiceUrl}?isNewVersion=${this.isNewVersion}`
+      const url = `${this.termsOfServiceUrl}?isNewVersion=${this.isNewVersion}`
 
       this.$http.put(url, this.termsOfServiceFile, {
         headers: {
@@ -418,6 +418,7 @@ export default {
     onTosInputChange: function(e) {
       const file = pathOr({}, ['target', 'files', 0], e)
       this.termsOfServiceFile = file
+      console.log(file)
     }
   }
 }
