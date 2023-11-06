@@ -418,7 +418,6 @@ export default {
     onTosInputChange: function(e) {
       const file = pathOr({}, ['target', 'files', 0], e)
       this.termsOfServiceFile = file
-      console.log(file)
     }
   }
 }
